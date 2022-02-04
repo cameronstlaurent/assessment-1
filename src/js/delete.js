@@ -5,12 +5,13 @@ console.log(db)
 
 async function pageInit(){
     const key = sessionStorage.getItem('key');
-    const carRef = dataRef(db, 'cars/');
-    const carSnapShot = await get(carRef)
-    const data = carSnapShot.val();
-    carRef.child(key).remove();
     console.log(key)
     //read in the object RTD with that key
+    async function deleteDocument(key) {
+        let request = await deleteDoc(doc(db, "cars", key));
+        console.log(request)
+    }
+    deleteDocument()
 }
 
 pageInit()
