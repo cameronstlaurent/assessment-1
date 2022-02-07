@@ -9,13 +9,16 @@ async function pageInit(){
     console.log(key);
     const carRef = databaseRef(db, `rentals/${key}`);
     const carSnapShot = await get(carRef);
+
+
     //formatter for the form
     if(carSnapShot.exists()){
         setFieldValues(carSnapShot.val());
-
     }
 
+
     carForm.addEventListener('submit', onUpdateCar);
+
 }
 
 function onUpdateCar(e){
@@ -27,9 +30,9 @@ function onUpdateCar(e){
 
 function setFieldValues(car, urlPath, price, manufacturer){
 
-    carForm.elements['diecastManufacturer'].value = manufacturer
-    carForm.elements['carName'].value = car
-    carForm.elements['price'].value = price
+    carForm.elements['diecastManufacturer'].value = manufacturer;
+    carForm.elements['carName'].value = car;
+    carForm.elements['price'].value = price;
     document.querySelector('#uploadImage img').src = urlPath;
 }
 
@@ -51,8 +54,6 @@ function updateCarData(){
         const imageRef = storageRef(storage, `images/${file.name}`);
            //uploading file to the storage bucket
       
-
-
            const dataRef = databaseRef( db, 'cars');
 
            //uploading file to the storage bucket
@@ -67,7 +68,6 @@ function updateCarData(){
            const key = sessionStorage.getItem('key');
        
            const dataRef = databaseRef(db, `cars/${key}`);
-       
        
            set(dataRef, {
                 urlPath,
